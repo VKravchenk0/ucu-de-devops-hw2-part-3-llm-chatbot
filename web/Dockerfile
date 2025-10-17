@@ -1,8 +1,5 @@
 FROM python:3.13-slim
 
-# todo remove
-RUN apt-get -y update; apt-get -y install curl
-
 WORKDIR /app
 
 COPY requirements.txt .
