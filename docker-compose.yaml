@@ -1,0 +1,14 @@
+services:
+  web:
+    build: ./web
+    image: llm-chatbot
+    ports:
+      - "8050:8050"
+    models:
+      - llm
+    extra_hosts:
+      - "model-runner.docker.internal:host-gateway"
+
+models:
+  llm:
+    model: ai/smollm2
