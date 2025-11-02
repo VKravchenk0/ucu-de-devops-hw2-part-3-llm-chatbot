@@ -1,13 +1,17 @@
 # HW2 + HW3: Containerized LLM chat
 
-HW2: Зроблено на Streamlit + Docker model runner, запуск через docker compose
+HW2: Зроблено на Streamlit + Docker model runner, запуск через docker compose  
+
 HW3: Зроблено на Streamlit + Ollama, запускається в k8s
 
+Код для streamlit-частини взято з офіційного прикладу:  
 https://streamlit.io/playground?example=llm_chat
 
-## HW2:
+## HW2: docker-compose + docker model runner
 ### Налаштування Windows + WSL
-`Docker desktop -> Settings -> AI -> Enable Docker Model Runner + Enable host-side TCP support`
+```
+Docker desktop -> Settings -> AI -> Enable Docker Model Runner + Enable host-side TCP support
+```
 
 ### Запуск
 ```bash
@@ -18,7 +22,7 @@ docker compose -f ./docker-compose/docker-compose.yaml up --build
 http://localhost:8051
 
 
-## HW3
+## HW3: Kubernetes + Ollama
 
 1. Старт кластеру
     ```bash
@@ -37,7 +41,7 @@ http://localhost:8051
     kubectl apply -f k8s/
     ```
 
-3. Чекаємо, поки відпрацює завантаження моделі в initContainer, перевіряємо ресурси
+3. Чекаємо, поки відпрацює завантаження моделі в ollama init-контейнері, перевіряємо ресурси
     ```bash
     kubectl get all
     ```
