@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama
+  namespace: hw3-llm-chatbot
+spec:
+  selector:
+    matchLabels:
+      name: ollama
+  template:
+    metadata:
+      labels:
+        name: ollama
+    spec:
+      volumes:
+        - name: ollama-models
+          persistentVolumeClaim:
+            claimName: ollama-models-pvc
+
+      initContainers:
+        - name: pull-model
+          image: ollama/ollama:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Starting Ollama daemon in background..."
+              ollama serve &
+              sleep 5
+              echo "Pulling model smollm2..."
+              ollama pull smollm2
+              echo "Model pull complete."
+              pkill ollama || true
+          volumeMounts:
+            - name: ollama-models
+              mountPath: /root/.ollama
+
+      containers:
+        - name: ollama
+          image: ollama/ollama:latest
+          volumeMounts:
+            - name: ollama-models
+              mountPath: /root/.ollama
+          ports:
+            - name: http
+              containerPort: 11434
+              protocol: TCP
