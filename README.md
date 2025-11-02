@@ -9,7 +9,7 @@ https://streamlit.io/playground?example=llm_chat
 
 ## Запуск
 ```bash
-docker compose up --build
+docker compose -f ./docker-compose/docker-compose.yaml up --build
 ```
 
 ## URL

@@ -1,9 +1,9 @@
 services:
   web:
-    build: ./web
+    build: ../web
     image: llm-chatbot
     ports:
-      - "8052:8050"
+      - "8051:8050"
     models:
       - llm
     extra_hosts:
