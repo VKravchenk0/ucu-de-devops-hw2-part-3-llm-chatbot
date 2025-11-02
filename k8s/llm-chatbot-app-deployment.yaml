@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-chatbot-app
+  namespace: hw3-llm-chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-chatbot-app
+  template:
+    metadata:
+      labels:
+        app: llm-chatbot-app
+    spec:
+      containers:
+        - name: llm-chatbot-app
+          image: llm-chatbot-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8050
+          env:
+            # - name: OLLAMA_HOST
+            #   value: "http://ollama:11434"
+            - name: LLM_BASE_URL
+              value: "http://ollama:11434"
+            - name: LLM_MODEL
+              value: smollm2
+          # only needed if you need host access
+          # hostAliases:
+          #   - ip: "host-gateway"
+          #     hostnames:
+          #       - "model-runner.docker.internal"

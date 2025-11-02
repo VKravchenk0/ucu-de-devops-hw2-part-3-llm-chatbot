@@ -3,11 +3,13 @@ services:
     build: ./web
     image: llm-chatbot
     ports:
-      - "8050:8050"
+      - "8052:8050"
     models:
       - llm
     extra_hosts:
       - "model-runner.docker.internal:host-gateway"
+    environment:
+    - LLM_BASE_URL=${LLM_BASE_URL}
 
 models:
   llm:

@@ -11,12 +11,13 @@ log.basicConfig(level=log.INFO,
                 datefmt='%Y-%m-%dT%H:%M:%S')
 
 log.info("Starting web app")
-log.info(f'LLM Model URL: {os.environ['LLM_URL']}')
+# log.info(f'LLM Model URL: {os.environ['LLM_URL']}')
 log.info(f'LLM Model NAME: {os.environ['LLM_MODEL']}')
 
-base_url = 'http://model-runner.docker.internal:12434'
+# base_url = 'http://model-runner.docker.internal:12434'
+base_url = os.environ['LLM_BASE_URL']
 
-completions_url = f"{ base_url }/engines/v1/chat/completions"
+completions_url = f"{ base_url }/v1/chat/completions"
 log.info(f'Completions url: {completions_url}')
 
 st.write(f"LLM Model: {os.environ['LLM_MODEL']}")
